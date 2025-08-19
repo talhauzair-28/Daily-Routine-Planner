@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Daily Routine Planner",
+    "slug": "daily-routine-planner",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dailyroutineplanner.app",
+      "jsEngine": "jsc"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.dailyroutineplanner.app",
+      "jsEngine": "jsc"
+    },
+    "web": {
+      "favicon": "./src/assets/images/favicon.png"
+    }
+  }
+}
