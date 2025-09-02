@@ -53,7 +53,8 @@ interface CustomButtonProps extends ButtonProps {
     | ButtonVariant.SECONDARY
     | ButtonVariant.SUCCESS
     | ButtonVariant.WARNING
-    | ButtonVariant.ERROR;
+    | ButtonVariant.ERROR
+    | ButtonVariant.OUTLINED;
 
   /**
    * Button size affecting padding and text size
@@ -119,6 +120,12 @@ const Button: React.FC<CustomButtonProps> = ({
         return { backgroundColor: Colors.warning };
       case ButtonVariant.ERROR:
         return { backgroundColor: Colors.error };
+      case ButtonVariant.OUTLINED:
+        return { 
+          backgroundColor: 'transparent',
+          borderWidth: 1,
+          borderColor: Colors.primary 
+        };
       default:
         return { backgroundColor: Colors.primary };
     }
@@ -170,6 +177,19 @@ const Button: React.FC<CustomButtonProps> = ({
     }
   };
 
+  /**
+   * Get title color based on variant
+   * @returns Color string for title text
+   */
+  const getTitleColor = (): string => {
+    switch (variant) {
+      case ButtonVariant.OUTLINED:
+        return Colors.primary;
+      default:
+        return Colors.textOnPrimary;
+    }
+  };
+
   return (
     <RNEButton
       buttonStyle={[
@@ -182,7 +202,7 @@ const Button: React.FC<CustomButtonProps> = ({
       ]}
       titleStyle={[
         {
-          color: Colors.textOnPrimary,
+          color: getTitleColor(),
           ...getTitleStyle(),
         },
         titleStyle,

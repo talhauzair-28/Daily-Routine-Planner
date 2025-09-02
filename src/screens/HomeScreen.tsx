@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Badge, Button } from 'react-native-elements';
+import { Badge } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Card, Text } from '@/components/atoms';
+import { Card, Text, Button } from '@/components/atoms';
 
 import { Colors } from '@/constants/Colors';
 import {

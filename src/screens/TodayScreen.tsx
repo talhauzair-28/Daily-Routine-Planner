@@ -2,14 +2,15 @@ import { useNavigation } from '@react-navigation/native';
 import type { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, FAB } from 'react-native-elements';
+import { FAB } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
 
-import { Text, Card } from '@/components/atoms';
+import { Text, Card, Button } from '@/components/atoms';
 
 import { Colors } from '@/constants/Colors';
 import { ICON_SIZES, SPACING } from '@/constants/design';
+import { ButtonVariant } from '@/models/enums';
 import { RootState } from '@/store';
 import type { RootStackParamList } from '@/navigation/AppNavigator';
 import { ROUTES } from '@/navigation/routes';
@@ -117,12 +118,11 @@ const TodayScreen: React.FC = () => {
               </View>
             ))}
             <Button
-              type="outline"
+              variant={ButtonVariant.OUTLINED}
+              title="Manage Prayers"
               onPress={() => navigation.navigate(ROUTES.PRAYER_DETAIL, { prayerId: 'fajr' })}
               buttonStyle={styles.detailButton}
-            >
-              Manage Prayers
-            </Button>
+            />
         </Card>
 
         {/* Zikr Section */}
@@ -180,12 +180,11 @@ const TodayScreen: React.FC = () => {
               </View>
             ))}
             <Button
-              type="outline"
+              variant={ButtonVariant.OUTLINED}
+              title="Start Zikr Session"
               onPress={() => navigation.navigate(ROUTES.ZIKR_DETAIL, { sessionId: 'morning-zikr' })}
               buttonStyle={styles.detailButton}
-            >
-              Start Zikr Session
-            </Button>
+            />
         </Card>
 
         {/* Quran Section */}
@@ -238,12 +237,11 @@ const TodayScreen: React.FC = () => {
               </View>
             </View>
             <Button
-              type="outline"
+              variant={ButtonVariant.OUTLINED}
+              title="Log Quran Session"
               onPress={() => navigation.navigate(ROUTES.QURAN_DETAIL)}
               buttonStyle={styles.detailButton}
-            >
-              Log Quran Session
-            </Button>
+            />
         </Card>
 
         {/* Family Time Section */}
@@ -277,12 +275,11 @@ const TodayScreen: React.FC = () => {
               ))
             )}
             <Button
-              type="outline"
+              variant={ButtonVariant.OUTLINED}
+              title="Log Family Time"
               onPress={() => navigation.navigate(ROUTES.FAMILY_TIME_DETAIL)}
               buttonStyle={styles.detailButton}
-            >
-              Log Family Time
-            </Button>
+            />
         </Card>
 
         {/* Exercise Section */}
