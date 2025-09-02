@@ -13,7 +13,8 @@
       "Read(/Users/talha/Desktop/planner/**)",
       "Read(/Users/talha/Desktop/planner/**)",
       "Bash(mkdir:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

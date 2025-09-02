@@ -249,7 +249,7 @@ function generateReport() {
     console.log(`   📦 Import issues: ${importIssues}`);
     console.log('');
     console.log(
-      `${COLORS.YELLOW}📚 Please review the CODE_QUALITY_GUIDELINES.md for best practices.${COLORS.RESET}`
+      `${COLORS.YELLOW}📚 Please review the docs/CODE_QUALITY_GUIDELINES.md for best practices.${COLORS.RESET}`
     );
   }
 
