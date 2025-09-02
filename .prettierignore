@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+build/
+dist/
+.expo/
+.expo-shared/
+
+# Generated files
+*.generated.ts
+*.generated.js
+
+# Platform specific
+android/
+ios/
+web-build/
+
+# Config files that shouldn't be formatted
+*.config.js
+babel.config.js
+metro.config.js
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Environment files
+.env*
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation that may have specific formatting
+README.md
+CHANGELOG.md
+*.md

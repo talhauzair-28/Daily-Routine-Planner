@@ -2,46 +2,24 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@/components/*": [
-        "src/components/*"
-      ],
-      "@/screens/*": [
-        "src/screens/*"
-      ],
-      "@/navigation/*": [
-        "src/navigation/*"
-      ],
-      "@/store/*": [
-        "src/store/*"
-      ],
-      "@/services/*": [
-        "src/services/*"
-      ],
-      "@/utils/*": [
-        "src/utils/*"
-      ],
-      "@/types/*": [
-        "src/types/*"
-      ],
-      "@/constants/*": [
-        "src/constants/*"
-      ],
-      "@/assets/*": [
-        "src/assets/*"
-      ]
+      "@/*": ["src/*"],
+      "@/components/*": ["src/components/*"],
+      "@/screens/*": ["src/screens/*"],
+      "@/navigation/*": ["src/navigation/*"],
+      "@/store/*": ["src/store/*"],
+      "@/services/*": ["src/services/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/types/*": ["src/types/*"],
+      "@/constants/*": ["src/constants/*"],
+      "@/assets/*": ["src/assets/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react-native",
-    "lib": [
-      "es2017"
-    ],
-    "moduleResolution": "node",
+    "lib": ["es2017"],
+    "moduleResolution": "bundler",
     "noEmit": true,
     "strict": true,
     "target": "esnext",

@@ -19,30 +19,49 @@ import FamilyTimeDetailScreen from '@/screens/FamilyTimeDetailScreen';
 import DisciplineChallengesScreen from '@/screens/DisciplineChallengesScreen';
 import StreakDetailScreen from '@/screens/StreakDetailScreen';
 
-export type RootStackParamList = {
-  Main: undefined;
-  PrayerDetail: { prayerId: string };
-  ZikrDetail: { sessionId: string };
-  QuranDetail: undefined;
-  FamilyTimeDetail: { familyTimeId?: string };
-  DisciplineChallenges: undefined;
-  StreakDetail: { habitName: string };
-};
+// Import route constants
+import { ROUTES, RouteParams } from './routes';
 
-export type TabParamList = {
-  Home: undefined;
-  Today: undefined;
-  Habits: undefined;
-  Analytics: undefined;
-  Settings: undefined;
-};
+export type RootStackParamList = RouteParams;
+export type TabParamList = Pick<RouteParams, typeof ROUTES.HOME | typeof ROUTES.TODAY | typeof ROUTES.HABITS | typeof ROUTES.ANALYTICS | typeof ROUTES.SETTINGS>;
 
 const Tab = createBottomTabNavigator<TabParamList>();
 const Stack = createStackNavigator<RootStackParamList>();
 
 const TabNavigator: React.FC = () => {
+  // ==========================================
+  // Variable Declaration/States
+  // ==========================================
+  // (No state variables in this component)
+
+  // ==========================================
+  // Hooks/Custom Hooks
+  // ==========================================
   const theme = useTheme();
 
+  // ==========================================
+  // Use Effects
+  // ==========================================
+  // (No useEffect in this component)
+
+  // ==========================================
+  // Helper Methods
+  // ==========================================
+  // (No helper methods in this component)
+
+  // ==========================================
+  // Event Handlers
+  // ==========================================
+  // (Event handlers are inline in this component)
+
+  // ==========================================
+  // Render Methods
+  // ==========================================
+  // (No separate render methods in this component)
+
+  // ==========================================
+  // Return
+  // ==========================================
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -50,19 +69,19 @@ const TabNavigator: React.FC = () => {
           let iconName: string;
 
           switch (route.name) {
-            case 'Home':
+            case ROUTES.HOME:
               iconName = focused ? 'home' : 'home-outline';
               break;
-            case 'Today':
+            case ROUTES.TODAY:
               iconName = focused ? 'calendar-today' : 'calendar-today';
               break;
-            case 'Habits':
+            case ROUTES.HABITS:
               iconName = focused ? 'chart-line' : 'chart-line-variant';
               break;
-            case 'Analytics':
+            case ROUTES.ANALYTICS:
               iconName = focused ? 'chart-box' : 'chart-box-outline';
               break;
-            case 'Settings':
+            case ROUTES.SETTINGS:
               iconName = focused ? 'cog' : 'cog-outline';
               break;
             default:
@@ -83,28 +102,28 @@ const TabNavigator: React.FC = () => {
         headerTintColor: theme.colors.onSurface,
       })}
     >
-      <Tab.Screen 
-        name="Home" 
+      <Tab.Screen
+        name={ROUTES.HOME}
         component={HomeScreen}
         options={{ title: 'Dashboard' }}
       />
-      <Tab.Screen 
-        name="Today" 
+      <Tab.Screen
+        name={ROUTES.TODAY}
         component={TodayScreen}
         options={{ title: 'Today' }}
       />
-      <Tab.Screen 
-        name="Habits" 
+      <Tab.Screen
+        name={ROUTES.HABITS}
         component={HabitsScreen}
         options={{ title: 'Habits' }}
       />
-      <Tab.Screen 
-        name="Analytics" 
+      <Tab.Screen
+        name={ROUTES.ANALYTICS}
         component={AnalyticsScreen}
         options={{ title: 'Analytics' }}
       />
-      <Tab.Screen 
-        name="Settings" 
+      <Tab.Screen
+        name={ROUTES.SETTINGS}
         component={SettingsScreen}
         options={{ title: 'Settings' }}
       />
@@ -127,38 +146,38 @@ const AppNavigator: React.FC = () => {
         },
       }}
     >
-      <Stack.Screen 
-        name="Main" 
+      <Stack.Screen
+        name={ROUTES.MAIN}
         component={TabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen 
-        name="PrayerDetail" 
+      <Stack.Screen
+        name={ROUTES.PRAYER_DETAIL}
         component={PrayerDetailScreen}
         options={{ title: 'Prayer Details' }}
       />
-      <Stack.Screen 
-        name="ZikrDetail" 
+      <Stack.Screen
+        name={ROUTES.ZIKR_DETAIL}
         component={ZikrDetailScreen}
         options={{ title: 'Zikr Session' }}
       />
-      <Stack.Screen 
-        name="QuranDetail" 
+      <Stack.Screen
+        name={ROUTES.QURAN_DETAIL}
         component={QuranDetailScreen}
         options={{ title: 'Quran Session' }}
       />
-      <Stack.Screen 
-        name="FamilyTimeDetail" 
+      <Stack.Screen
+        name={ROUTES.FAMILY_TIME_DETAIL}
         component={FamilyTimeDetailScreen}
         options={{ title: 'Family Time' }}
       />
-      <Stack.Screen 
-        name="DisciplineChallenges" 
+      <Stack.Screen
+        name={ROUTES.DISCIPLINE_CHALLENGES}
         component={DisciplineChallengesScreen}
         options={{ title: 'Discipline Challenges' }}
       />
-      <Stack.Screen 
-        name="StreakDetail" 
+      <Stack.Screen
+        name={ROUTES.STREAK_DETAIL}
         component={StreakDetailScreen}
         options={{ title: 'Streak Details' }}
       />

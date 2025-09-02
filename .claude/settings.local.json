@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
