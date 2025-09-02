@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { ViewStyle } from 'react-native';
-import { ButtonProps } from 'react-native-paper';
+import { ButtonProps } from 'react-native-elements';
 
 import { ButtonVariant, Size } from '../../enums';
 

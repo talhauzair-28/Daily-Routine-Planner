@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { ViewStyle } from 'react-native';
-import { SwitchProps } from 'react-native-paper';
+import { SwitchProps } from 'react-native';
 
 export interface CustomSwitchProps extends SwitchProps {
   /**

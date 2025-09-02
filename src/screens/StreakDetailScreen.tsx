@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Title, Paragraph, useTheme } from 'react-native-paper';
+import { Text } from 'react-native-elements';
+import { Colors } from '@/constants';
 
 const StreakDetailScreen: React.FC = () => {
   // ==========================================
@@ -11,7 +12,7 @@ const StreakDetailScreen: React.FC = () => {
   // ==========================================
   // Hooks/Custom Hooks
   // ==========================================
-  const theme = useTheme();
+  // (No hooks in this component)
 
   // ==========================================
   // Use Effects
@@ -38,12 +39,12 @@ const StreakDetailScreen: React.FC = () => {
   // ==========================================
   return (
     <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      style={[styles.container, { backgroundColor: Colors.background }]}
     >
-      <Title>Streak Detail Screen</Title>
-      <Paragraph>
+      <Text h1 style={styles.title}>Streak Detail Screen</Text>
+      <Text style={styles.paragraph}>
         Habit streak details and analytics will be implemented here.
-      </Paragraph>
+      </Text>
     </View>
   );
 };
@@ -54,6 +55,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+  },
+  title: {
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  paragraph: {
+    textAlign: 'center',
+    fontSize: 16,
+    lineHeight: 24,
   },
 });
 

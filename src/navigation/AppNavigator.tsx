@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useTheme } from 'react-native-paper';
+import { Colors } from '@/constants';
 
 // Import screens
 import HomeScreen from '@/screens/HomeScreen';
@@ -37,7 +37,7 @@ const TabNavigator: React.FC = () => {
   // ==========================================
   // Hooks/Custom Hooks
   // ==========================================
-  const theme = useTheme();
+  // Using Colors from design system
 
   // ==========================================
   // Use Effects
@@ -90,16 +90,16 @@ const TabNavigator: React.FC = () => {
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: Colors.textSecondary,
         tabBarStyle: {
-          backgroundColor: theme.colors.surface,
-          borderTopColor: theme.colors.outline,
+          backgroundColor: Colors.surface,
+          borderTopColor: Colors.border,
         },
         headerStyle: {
-          backgroundColor: theme.colors.surface,
+          backgroundColor: Colors.surface,
         },
-        headerTintColor: theme.colors.onSurface,
+        headerTintColor: Colors.text,
       })}
     >
       <Tab.Screen
@@ -132,15 +132,15 @@ const TabNavigator: React.FC = () => {
 };
 
 const AppNavigator: React.FC = () => {
-  const theme = useTheme();
+  // Using Colors from design system
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.colors.surface,
+          backgroundColor: Colors.surface,
         },
-        headerTintColor: theme.colors.onSurface,
+        headerTintColor: Colors.text,
         headerTitleStyle: {
           fontWeight: 'bold',
         },

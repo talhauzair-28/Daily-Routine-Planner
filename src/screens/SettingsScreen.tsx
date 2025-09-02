@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Title, Paragraph, useTheme } from 'react-native-paper';
+import { Text } from 'react-native-elements';
+import { Colors } from '@/constants';
 
 const SettingsScreen: React.FC = () => {
   // ==========================================
@@ -11,7 +12,7 @@ const SettingsScreen: React.FC = () => {
   // ==========================================
   // Hooks/Custom Hooks
   // ==========================================
-  const theme = useTheme();
+  // (No hooks in this component)
 
   // ==========================================
   // Use Effects
@@ -37,13 +38,11 @@ const SettingsScreen: React.FC = () => {
   // Return
   // ==========================================
   return (
-    <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
-      <Title>Settings Screen</Title>
-      <Paragraph>
+    <View style={[styles.container, { backgroundColor: Colors.background }]}>
+      <Text h1 style={styles.title}>Settings Screen</Text>
+      <Text style={styles.paragraph}>
         App settings and preferences will be implemented here.
-      </Paragraph>
+      </Text>
     </View>
   );
 };
@@ -54,6 +53,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+  },
+  title: {
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  paragraph: {
+    textAlign: 'center',
+    fontSize: 16,
+    lineHeight: 24,
   },
 });
 

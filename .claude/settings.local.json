@@ -14,7 +14,10 @@
       "Read(/Users/talha/Desktop/planner/**)",
       "Bash(mkdir:*)",
       "Bash(mv:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(find:*)",
+      "Bash(npm install)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []

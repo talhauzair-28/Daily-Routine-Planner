@@ -2,11 +2,11 @@ import { useNavigation } from '@react-navigation/native';
 import type { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Card, FAB, useTheme } from 'react-native-paper';
+import { Button, FAB } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
 
-import { Text } from '@/components/atoms';
+import { Text, Card } from '@/components/atoms';
 
 import { Colors } from '@/constants/Colors';
 import { ICON_SIZES, SPACING } from '@/constants/design';
@@ -23,7 +23,7 @@ const TodayScreen: React.FC = () => {
   // ==========================================
   // Hooks/Custom Hooks
   // ==========================================
-  const theme = useTheme();
+  // (No hooks in this component)
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { todayRecord } = useSelector((state: RootState) => state.habits);
 
@@ -60,13 +60,10 @@ const TodayScreen: React.FC = () => {
   // Return
   // ==========================================
   return (
-    <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
+    <View style={[styles.container, { backgroundColor: Colors.background }]}>
       <ScrollView style={styles.scrollView}>
         {/* Today's Overview */}
         <Card style={styles.card}>
-          <Card.Content>
             <Text variant="h4" color="text">
               Today&apos;s Progress
             </Text>
@@ -78,12 +75,10 @@ const TodayScreen: React.FC = () => {
                   ? 'Work From Home'
                   : 'Weekend'}
             </Text>
-          </Card.Content>
         </Card>
 
         {/* Prayers Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
               <Icon
                 name="mosque"
@@ -122,18 +117,16 @@ const TodayScreen: React.FC = () => {
               </View>
             ))}
             <Button
-              mode="outlined"
+              type="outline"
               onPress={() => navigation.navigate(ROUTES.PRAYER_DETAIL, { prayerId: 'fajr' })}
-              style={styles.detailButton}
+              buttonStyle={styles.detailButton}
             >
               Manage Prayers
             </Button>
-          </Card.Content>
         </Card>
 
         {/* Zikr Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
               <Icon
                 name="hands-pray"
@@ -187,18 +180,16 @@ const TodayScreen: React.FC = () => {
               </View>
             ))}
             <Button
-              mode="outlined"
+              type="outline"
               onPress={() => navigation.navigate(ROUTES.ZIKR_DETAIL, { sessionId: 'morning-zikr' })}
-              style={styles.detailButton}
+              buttonStyle={styles.detailButton}
             >
               Start Zikr Session
             </Button>
-          </Card.Content>
         </Card>
 
         {/* Quran Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
               <Icon
                 name="book-open"
@@ -247,18 +238,16 @@ const TodayScreen: React.FC = () => {
               </View>
             </View>
             <Button
-              mode="outlined"
+              type="outline"
               onPress={() => navigation.navigate(ROUTES.QURAN_DETAIL)}
-              style={styles.detailButton}
+              buttonStyle={styles.detailButton}
             >
               Log Quran Session
             </Button>
-          </Card.Content>
         </Card>
 
         {/* Family Time Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
               <Icon name="heart" size={ICON_SIZES.LG} color={Colors.family} />
               <Text variant="h5" color="text" style={styles.sectionTitle}>
@@ -288,18 +277,16 @@ const TodayScreen: React.FC = () => {
               ))
             )}
             <Button
-              mode="outlined"
+              type="outline"
               onPress={() => navigation.navigate(ROUTES.FAMILY_TIME_DETAIL)}
-              style={styles.detailButton}
+              buttonStyle={styles.detailButton}
             >
               Log Family Time
             </Button>
-          </Card.Content>
         </Card>
 
         {/* Exercise Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
               <Icon
                 name="dumbbell"
@@ -335,7 +322,6 @@ const TodayScreen: React.FC = () => {
             <View style={styles.qualityStars}>
               {renderStars(todayRecord?.exercise.quality || 1)}
             </View>
-          </Card.Content>
         </Card>
 
         <View style={styles.bottomPadding} />
@@ -343,8 +329,8 @@ const TodayScreen: React.FC = () => {
 
       {/* Floating Action Button */}
       <FAB
-        icon="plus"
-        style={[styles.fab, { backgroundColor: theme.colors.primary }]}
+        icon={<Icon name="plus" size={ICON_SIZES.LG} color="white" />}
+        buttonStyle={[styles.fab, { backgroundColor: Colors.primary }]}
         onPress={() => navigation.navigate(ROUTES.DISCIPLINE_CHALLENGES)}
       />
     </View>
