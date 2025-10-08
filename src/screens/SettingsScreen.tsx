@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
-import { Colors } from '@/constants';
+
+import { PlaceholderScreen } from '@/components/templates';
 
 const SettingsScreen: React.FC = () => {
   // ==========================================
@@ -38,31 +37,12 @@ const SettingsScreen: React.FC = () => {
   // Return
   // ==========================================
   return (
-    <View style={[styles.container, { backgroundColor: Colors.background }]}>
-      <Text h1 style={styles.title}>Settings Screen</Text>
-      <Text style={styles.paragraph}>
-        App settings and preferences will be implemented here.
-      </Text>
-    </View>
+    <PlaceholderScreen
+      title="Settings Screen"
+      description="App settings and preferences will be implemented here."
+      emoji="⚙️"
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  title: {
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  paragraph: {
-    textAlign: 'center',
-    fontSize: 16,
-    lineHeight: 24,
-  },
-});
 
 export default SettingsScreen;

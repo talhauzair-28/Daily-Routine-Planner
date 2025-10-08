@@ -38,6 +38,7 @@ import {
   Size,
   SPACING,
   SpacingSize,
+  TYPOGRAPHY,
 } from '@/constants/design';
 import { Streak } from '@/types';
 import React, { JSX } from 'react';
@@ -470,11 +471,11 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.h4,
     marginRight: SPACING.XS,
   },
   celebrationEmoji: {
-    fontSize: 20,
+    ...TYPOGRAPHY.h4,
   },
   statsContainer: {
     alignItems: 'center',
@@ -516,12 +517,12 @@ const styles = StyleSheet.create({
   motivationalText: {
     textAlign: 'center',
     fontStyle: 'italic',
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.caption,
   },
   showMore: {
     textAlign: 'center',
     marginTop: SPACING.MD,
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.caption,
     textDecorationLine: 'underline',
   },
 
@@ -529,7 +530,7 @@ const styles = StyleSheet.create({
   compactTitle: {
     textAlign: 'center',
     marginBottom: SPACING.SM,
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.h5,
   },
   compactContainer: {
     flexDirection: 'row',
@@ -551,13 +552,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   emptyEmoji: {
-    fontSize: 48,
+    ...TYPOGRAPHY.h1,
     marginBottom: SPACING.MD,
   },
   emptyText: {
     textAlign: 'center',
     marginBottom: SPACING.SM,
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.body,
   },
   emptySubtext: {
     textAlign: 'center',

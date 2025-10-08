@@ -40,6 +40,7 @@ import {
   Size,
   SPACING,
   SpacingSize,
+  TYPOGRAPHY,
 } from '@/constants/design';
 import { getMotivationalMessage, getScoreBadgeVariant } from '@/utils';
 
@@ -338,11 +339,11 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.XS / 2,
   },
   workTypeIcon: {
-    fontSize: 16,
+    ...TYPOGRAPHY.body,
     marginRight: SPACING.XS,
   },
   workType: {
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.bodySmall,
   },
   workDescription: {
     fontStyle: 'italic',
@@ -377,10 +378,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   nextPrayerLabel: {
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.captionSmall,
   },
   nextPrayerTime: {
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.bodySmall,
   },
 });
 

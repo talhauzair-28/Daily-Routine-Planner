@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
-import { Colors } from '@/constants';
+
+import { PlaceholderScreen } from '@/components/templates';
 
 const QuranDetailScreen: React.FC = () => {
   // ==========================================
@@ -38,33 +37,12 @@ const QuranDetailScreen: React.FC = () => {
   // Return
   // ==========================================
   return (
-    <View
-      style={[styles.container, { backgroundColor: Colors.background }]}
-    >
-      <Text h1 style={styles.title}>Quran Detail Screen</Text>
-      <Text style={styles.paragraph}>
-        Quran recitation and translation tracking will be implemented here.
-      </Text>
-    </View>
+    <PlaceholderScreen
+      title="Quran Detail Screen"
+      description="Quran recitation and translation tracking will be implemented here."
+      emoji="📖"
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  title: {
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  paragraph: {
-    textAlign: 'center',
-    fontSize: 16,
-    lineHeight: 24,
-  },
-});
 
 export default QuranDetailScreen;

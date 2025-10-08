@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
-import { Colors } from '@/constants';
+
+import { PlaceholderScreen } from '@/components/templates';
 
 const StreakDetailScreen: React.FC = () => {
   // ==========================================
@@ -38,33 +37,12 @@ const StreakDetailScreen: React.FC = () => {
   // Return
   // ==========================================
   return (
-    <View
-      style={[styles.container, { backgroundColor: Colors.background }]}
-    >
-      <Text h1 style={styles.title}>Streak Detail Screen</Text>
-      <Text style={styles.paragraph}>
-        Habit streak details and analytics will be implemented here.
-      </Text>
-    </View>
+    <PlaceholderScreen
+      title="Streak Detail Screen"
+      description="Habit streak details and analytics will be implemented here."
+      emoji="🔥"
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  title: {
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  paragraph: {
-    textAlign: 'center',
-    fontSize: 16,
-    lineHeight: 24,
-  },
-});
 
 export default StreakDetailScreen;

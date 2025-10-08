@@ -51,6 +51,7 @@ import {
   IconSize,
   Size,
   SPACING,
+  TYPOGRAPHY,
 } from '@/constants/design';
 import { getQualityDescription } from '@/utils';
 
@@ -422,7 +423,7 @@ const styles = StyleSheet.create({
   },
   status: {
     marginBottom: SPACING.XS,
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.captionSmall,
   },
   badge: {
     marginBottom: SPACING.XS,

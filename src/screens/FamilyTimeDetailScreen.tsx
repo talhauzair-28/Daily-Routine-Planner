@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
-import { Colors } from '@/constants';
+
+import { PlaceholderScreen } from '@/components/templates';
 
 const FamilyTimeDetailScreen: React.FC = () => {
   // ==========================================
@@ -38,31 +37,12 @@ const FamilyTimeDetailScreen: React.FC = () => {
   // Return
   // ==========================================
   return (
-    <View style={[styles.container, { backgroundColor: Colors.background }]}>
-      <Text h1 style={styles.title}>Family Time Detail Screen</Text>
-      <Text style={styles.paragraph}>
-        Family time logging and quality assessment will be implemented here.
-      </Text>
-    </View>
+    <PlaceholderScreen
+      title="Family Time Detail Screen"
+      description="Family time logging and quality assessment will be implemented here."
+      emoji="❤️"
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  title: {
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  paragraph: {
-    textAlign: 'center',
-    fontSize: 16,
-    lineHeight: 24,
-  },
-});
 
 export default FamilyTimeDetailScreen;

@@ -42,6 +42,7 @@ import {
   CardVariant,
   SPACING,
   SpacingSize,
+  TYPOGRAPHY,
 } from '@/constants/design';
 import { getMotivationalMessage } from '@/utils';
 import React from 'react';
@@ -530,7 +531,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     marginBottom: SPACING.MD,
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.h4,
   },
   mainScore: {
     alignItems: 'center',
@@ -547,7 +548,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   grade: {
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.h3,
   },
 
   // Categories
@@ -557,7 +558,7 @@ const styles = StyleSheet.create({
   categoriesTitle: {
     textAlign: 'center',
     marginBottom: SPACING.MD,
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.h6,
   },
   categoryItem: {
     marginBottom: SPACING.SM,
@@ -582,11 +583,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   categoryIcon: {
-    fontSize: 20,
+    ...TYPOGRAPHY.h4,
     marginRight: SPACING.SM,
   },
   categoryName: {
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.bodySmall,
   },
   categoryScore: {
     alignItems: 'flex-end',
@@ -605,7 +606,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   streakValue: {
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.body,
     marginVertical: SPACING.XS / 2,
   },
 
@@ -618,7 +619,7 @@ const styles = StyleSheet.create({
   },
   motivationalText: {
     textAlign: 'center',
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.caption,
     marginBottom: SPACING.SM,
   },
   islamicQuote: {
@@ -641,7 +642,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   compactGrade: {
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.bodySmall,
   },
 
   // Summary variant styles

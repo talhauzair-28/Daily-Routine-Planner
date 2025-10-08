@@ -44,6 +44,7 @@ import {
   Size,
   SPACING,
   SpacingSize,
+  TYPOGRAPHY,
 } from '@/constants/design';
 import { Prayer } from '@/types';
 import { formatTime, getPrayerIcon, getQualityColor } from '@/utils';
@@ -509,7 +510,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     marginBottom: SPACING.SM,
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.h4,
   },
   summaryContainer: {
     width: '100%',
@@ -546,7 +547,7 @@ const styles = StyleSheet.create({
   showMore: {
     textAlign: 'center',
     marginTop: SPACING.MD,
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.caption,
   },
   emptyContainer: {
     paddingVertical: SPACING['3XL'],

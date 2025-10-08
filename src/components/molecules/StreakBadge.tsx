@@ -34,7 +34,7 @@
 import React from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 
-import { RELIGIOUS_DIMENSIONS, Size, SPACING } from '@/constants/design';
+import { RELIGIOUS_DIMENSIONS, Size, SPACING, TYPOGRAPHY } from '@/constants/design';
 import {
   getStreakColor,
   getStreakText,
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
   milestone: {
     marginTop: SPACING.XS,
     textAlign: 'center',
-    fontWeight: 'bold',
+    ...TYPOGRAPHY.captionSmall,
   },
 });
 

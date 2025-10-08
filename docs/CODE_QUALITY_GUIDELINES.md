@@ -28,6 +28,69 @@ Before creating ANY helper function, ask:
 - [ ] Can this be generalized for reuse?
 - [ ] Should this be in utilities instead of component-specific?
 
+#### **4. 🔄 Redux Selector Rules - PREVENT UNWANTED RE-RENDERS**
+```typescript
+// ❌ BAD: Selecting entire slice causes re-renders on any slice change
+const { todayRecord } = useSelector((state: RootState) => state.habits);
+const { activeStreaks } = useSelector((state: RootState) => state.streaks);
+
+// ✅ GOOD: Select only the specific property you need
+const todayRecord = useSelector((state: RootState) => state.habits.todayRecord);
+const activeStreaks = useSelector((state: RootState) => state.streaks.activeStreaks);
+```
+
+**Why this matters:**
+- **Performance**: Component only re-renders when the specific data changes
+- **Efficiency**: Prevents unnecessary renders when unrelated slice data updates
+- **React-Redux best practice**: Select minimal data needed
+
+#### **5. 🌟 Elevation & Shadow Rules - CONSISTENT CROSS-PLATFORM SHADOWS**
+```typescript
+// ❌ BAD: Hardcoded elevation values
+const styles = StyleSheet.create({
+  card: {
+    elevation: 3, // Android only
+    // Missing iOS shadow properties
+  },
+});
+
+// ❌ BAD: Platform-specific shadow code
+const styles = StyleSheet.create({
+  card: {
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
+  },
+});
+
+// ✅ GOOD: Use standardized elevation system
+import { ELEVATION } from '@/constants/design';
+
+const styles = StyleSheet.create({
+  card: {
+    ...ELEVATION.CARD, // Works on both iOS and Android
+  },
+});
+```
+
+**Elevation Guidelines:**
+- **ELEVATION.FLAT**: No shadow (text, icons, dividers)
+- **ELEVATION.RAISED**: Minimal shadow (buttons in resting state)  
+- **ELEVATION.LOW**: Low shadow (input fields)
+- **ELEVATION.CARD**: Standard card shadow (most common for cards)
+- **ELEVATION.BUTTON**: Button shadow (elevated buttons)
+- **ELEVATION.FLOATING**: Floating elements (FAB, app bars)
+- **ELEVATION.MODAL**: Modal/drawer shadow
+- **ELEVATION.POPUP**: Highest shadow (tooltips, dropdowns)
+
 ### **🏗️ CENTRALIZATION STRATEGY**
 
 #### **✅ When to Create Centralized Utilities**
@@ -58,6 +121,241 @@ export const IslamicUtils = {
   // ... other Islamic functions
 };
 ```
+
+## 🏗️ **ARCHITECTURAL PATTERNS**
+
+### **📋 TEMPLATE SYSTEM - CONSISTENT UI COMPONENTS**
+
+Templates provide reusable UI patterns that ensure consistency across screens while eliminating code duplication.
+
+#### **🎯 Template Types & Usage**
+```typescript
+// ✅ GOOD: Use templates for consistent UI patterns
+import {
+  BaseScreen,           // Standard screen wrapper
+  ScreenHeaderCard,     // Consistent headers  
+  ScreenSection,        // Card-based sections
+  CategoryCard,         // Category display cards
+  PlaceholderScreen     // Unimplemented screens
+} from '@/components/templates';
+```
+
+#### **🔗 Template Hierarchy**
+1. **BaseScreen**: Foundation for all screens
+   ```typescript
+   // Provides: scrolling, padding, background, comment structure
+   <BaseScreen showsVerticalScrollIndicator={false}>
+     {children}
+   </BaseScreen>
+   ```
+
+2. **ScreenHeaderCard**: Standardized headers
+   ```typescript
+   // Provides: greeting, date, context info with consistent styling
+   <ScreenHeaderCard
+     greeting="Assalamu Alaikum! 🌅"
+     date={new Date().toISOString()}
+     contextInfo={{
+       text: "Weekend",
+       icon: "home-heart", 
+       color: Colors.family
+     }}
+   />
+   ```
+
+3. **ScreenSection**: Card-based content sections
+   ```typescript
+   // Provides: title, icon, consistent card styling
+   <ScreenSection 
+     title="Today's Progress" 
+     icon="target" 
+     iconColor={Colors.primary}
+   >
+     {content}
+   </ScreenSection>
+   ```
+
+4. **CategoryCard**: Reusable category displays
+   ```typescript
+   // Eliminates duplicate category item code
+   <CategoryCard
+     label="Spiritual"
+     icon="mosque"
+     iconColor={Colors.spiritual}
+     currentScore={9}
+     maxScore={10}
+     scoreColor={Colors.excellent}
+   />
+   ```
+
+5. **PlaceholderScreen**: Unimplemented screens
+   ```typescript
+   // Consistent placeholder with proper structure
+   <PlaceholderScreen
+     title="Analytics Screen"
+     description="Coming soon..."
+     emoji="📊"
+   />
+   ```
+
+#### **✅ Template Rules**
+1. **ALWAYS use templates** instead of custom UI patterns
+2. **BaseScreen** is mandatory for all screens
+3. **ScreenSection** for any card-based content
+4. **Consistent comment structure** in all components
+5. **Props over hardcoded values** for flexibility
+
+#### **❌ Template Anti-Patterns**
+```typescript
+// ❌ BAD: Custom screen wrapper
+<ScrollView style={customStyles}>
+  <View style={customContainer}>
+    {content}
+  </View>
+</ScrollView>
+
+// ❌ BAD: Hardcoded card sections  
+<Card style={customCard}>
+  <Text style={customTitle}>Section Title</Text>
+  {content}
+</Card>
+
+// ❌ BAD: Duplicate category items
+<View style={categoryItem}>
+  <Icon name="mosque" />
+  <Text>Spiritual</Text>
+  <Text>9/10</Text>
+</View>
+```
+
+### **📦 CONTAINER SYSTEM - PERFORMANCE OPTIMIZATION**
+
+Containers isolate Redux state subscriptions and business logic to prevent unnecessary re-renders and improve performance.
+
+#### **🏛️ Container Organization**
+```typescript
+// Screen-specific container organization
+src/containers/
+├── HomeScreenContainers/
+│   ├── index.ts
+│   ├── DisciplineScoreContainer.tsx
+│   ├── CategoryBreakdownContainer.tsx
+│   ├── ActiveStreaksContainer.tsx
+│   └── QuickActionsContainer.tsx
+├── TodayScreenContainers/          // Future screens
+│   └── ...
+└── SharedContainers/               // Cross-screen containers
+    └── ...
+```
+
+#### **🎯 Container Types**
+
+1. **State-Connected Containers**: Subscribe to specific Redux state
+   ```typescript
+   // ✅ GOOD: Isolated state subscription
+   const DisciplineScoreContainer = ({ maxScore }) => {
+     // Only subscribe to discipline state
+     const dailyScores = useSelector(
+       (state: RootState) => state.discipline.dailyScores
+     );
+     
+     return (
+       <ScreenSection title="Discipline Score">
+         {/* Score logic and rendering */}
+       </ScreenSection>
+     );
+   };
+   ```
+
+2. **Pure Presentation Containers**: No Redux subscriptions
+   ```typescript
+   // ✅ GOOD: Pure component with callbacks
+   const QuickActionsContainer = ({ onNavigateToToday }) => {
+     // No Redux state - pure presentation
+     return (
+       <ScreenSection title="Quick Actions">
+         <Button onPress={onNavigateToToday} />
+       </ScreenSection>
+     );
+   };
+   ```
+
+#### **🚀 Performance Benefits**
+```typescript
+// ❌ BAD: Monolithic screen with all state
+const HomeScreen = () => {
+  // ALL state subscriptions in one component
+  const todayRecord = useSelector(state => state.habits.todayRecord);
+  const activeStreaks = useSelector(state => state.streaks.activeStreaks);
+  const dailyScores = useSelector(state => state.discipline.dailyScores);
+  
+  // ANY state change re-renders ENTIRE screen
+  return (/* massive screen with all sections */);
+};
+
+// ✅ GOOD: Containerized sections with isolated state
+const HomeScreen = () => {
+  // Only minimal state for screen coordination
+  const todayRecord = useSelector(state => state.habits.todayRecord);
+  
+  return (
+    <BaseScreen>
+      <ScreenHeaderCard {...headerProps} />
+      {/* Each container manages its own state */}
+      <DisciplineScoreContainer />    {/* Only discipline state */}
+      <CategoryBreakdownContainer />  {/* Only discipline state */}
+      <ActiveStreaksContainer />      {/* Only streaks state */}
+      <QuickActionsContainer />       {/* No Redux state */}
+    </BaseScreen>
+  );
+};
+```
+
+#### **✅ Container Rules**
+1. **One concern per container** - single responsibility
+2. **Minimal state subscriptions** - only what's needed
+3. **Screen-specific organization** - group by screen
+4. **Reusable across screens** when possible
+5. **Templates for UI, containers for logic**
+
+#### **🎭 Container Patterns**
+
+1. **State Isolation Pattern**:
+   ```typescript
+   // Each container subscribes to minimal state
+   const ScoreContainer = () => {
+     const scores = useSelector(state => state.discipline.dailyScores);
+     // Only re-renders when discipline scores change
+   };
+   
+   const StreaksContainer = () => {
+     const streaks = useSelector(state => state.streaks.activeStreaks);  
+     // Only re-renders when streaks change
+   };
+   ```
+
+2. **Callback Props Pattern**:
+   ```typescript
+   // Parent handles navigation, container handles presentation
+   const ActionsContainer = ({ onNavigate }) => {
+     return (
+       <ScreenSection>
+         <Button onPress={() => onNavigate('TODAY')} />
+       </ScreenSection>
+     );
+   };
+   ```
+
+3. **Configuration Pattern**:
+   ```typescript
+   // Configurable containers for flexibility
+   const CategoriesContainer = () => {
+     const categories = [
+       { key: 'spiritual', label: 'Spiritual', maxScore: 9 },
+       { key: 'family', label: 'Family', maxScore: 4 },
+     ];
+   };
+   ```
 
 ## 🔧 **IMPLEMENTATION STANDARDS**
 
@@ -164,6 +462,20 @@ import {
 } from '@/utils';
 ```
 
+### **🌟 Elevation & Shadows**
+```typescript
+// ALWAYS use these for consistent cross-platform shadows
+import {
+  ELEVATION,            // Semantic elevation levels
+  SHADOWS,              // Raw shadow values if needed
+} from '@/constants/design';
+
+// Usage examples:
+...ELEVATION.CARD,      // Most common for cards
+...ELEVATION.FLOATING,  // For FABs and app bars
+...ELEVATION.MODAL,     // For modals and drawers
+```
+
 ## 🎯 **DEVELOPMENT WORKFLOW**
 
 ### **✅ Before Creating Any Function:**
@@ -186,6 +498,8 @@ import {
 - [ ] Consistent import order
 - [ ] Islamic context preserved
 - [ ] Type safety maintained
+- [ ] No hardcoded elevation/shadow values - use ELEVATION system
+- [ ] Cross-platform shadow compatibility ensured
 
 ## 🛠️ **TOOLS & AUTOMATION**
 

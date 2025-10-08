@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { Text, Card, Button } from '@/components/atoms';
 
 import { Colors } from '@/constants/Colors';
-import { ICON_SIZES, SPACING } from '@/constants/design';
+import { ICON_SIZES, SPACING } from '@/constants/design/Dimensions';
 import { ButtonVariant } from '@/models/enums';
 import { RootState } from '@/store';
 import type { RootStackParamList } from '@/navigation/AppNavigator';
@@ -26,7 +26,7 @@ const TodayScreen: React.FC = () => {
   // ==========================================
   // (No hooks in this component)
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { todayRecord } = useSelector((state: RootState) => state.habits);
+  const todayRecord = useSelector((state: RootState) => state.habits.todayRecord);
 
   // ==========================================
   // Use Effects
@@ -364,12 +364,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   activityName: {
-    fontWeight: 'bold',
     marginBottom: SPACING.XS,
   },
   activityTime: {
-    fontSize: 12,
-    color: Colors.textSecondary,
     marginBottom: SPACING.XS,
   },
   activityStatus: {
@@ -386,8 +383,6 @@ const styles = StyleSheet.create({
     marginTop: SPACING.XS,
   },
   progressText: {
-    fontSize: 12,
-    color: Colors.textSecondary,
   },
   quranSessions: {
     marginBottom: SPACING.SM + SPACING.XS, // 12px
@@ -398,12 +393,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E0E0E0',
   },
   sessionType: {
-    fontWeight: 'bold',
     marginBottom: SPACING.XS,
   },
   duration: {
-    fontSize: 12,
-    color: Colors.textSecondary,
     marginTop: SPACING.XS,
   },
   exerciseProgress: {

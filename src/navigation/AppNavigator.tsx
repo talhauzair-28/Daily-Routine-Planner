@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from '@/constants';
+import { TYPOGRAPHY } from '@/constants/design';
 
 // Import screens
 import HomeScreen from '@/screens/HomeScreen';
@@ -142,7 +143,7 @@ const AppNavigator: React.FC = () => {
         },
         headerTintColor: Colors.text,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          ...TYPOGRAPHY.h5,
         },
       }}
     >

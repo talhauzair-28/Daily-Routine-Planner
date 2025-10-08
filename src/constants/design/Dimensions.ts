@@ -194,10 +194,17 @@ export const GRID = {
 } as const;
 
 /**
- * Shadow/Elevation values
+ * Shadow/Elevation values - Cross-platform shadow system
+ * 
+ * Provides consistent shadows across iOS and Android platforms.
+ * iOS uses shadowColor, shadowOffset, shadowOpacity, and shadowRadius.
+ * Android uses elevation for Material Design shadows.
+ * 
+ * Usage: Apply entire shadow object to style for cross-platform compatibility.
+ * Example: ...SHADOWS.MD
  */
 export const SHADOWS = {
-  /** No shadow */
+  /** No shadow - Elevation 0 */
   NONE: {
     shadowColor: 'transparent',
     shadowOffset: { width: 0, height: 0 },
@@ -205,7 +212,15 @@ export const SHADOWS = {
     shadowRadius: 0,
     elevation: 0,
   },
-  /** Small shadow */
+  /** Extra small shadow - Elevation 1 */
+  XS: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 1,
+    elevation: 1,
+  },
+  /** Small shadow - Elevation 2 */
   SM: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -213,30 +228,86 @@ export const SHADOWS = {
     shadowRadius: 2,
     elevation: 2,
   },
-  /** Medium shadow */
+  /** Medium shadow - Elevation 3 (Most commonly used for cards) */
   MD: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.12,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  /** Large shadow - Elevation 4 */
+  LG: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 4,
     elevation: 4,
   },
-  /** Large shadow */
-  LG: {
+  /** Extra large shadow - Elevation 6 */
+  XL: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.18,
+    shadowRadius: 6,
+    elevation: 6,
+  },
+  /** 2X large shadow - Elevation 8 */
+  '2XL': {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 8,
   },
-  /** Extra large shadow */
-  XL: {
+  /** 3X large shadow - Elevation 12 */
+  '3XL': {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    elevation: 12,
+  },
+  /** Maximum shadow - Elevation 16 */
+  MAX: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.3,
     shadowRadius: 16,
     elevation: 16,
   },
+} as const;
+
+/**
+ * Elevation levels mapping to common use cases
+ * 
+ * Quick reference for appropriate elevation levels:
+ * - FLAT: No elevation (0) - Text, icons, dividers
+ * - RAISED: Minimal elevation (1) - Buttons in resting state
+ * - CARD: Standard card elevation (3) - Cards, dialogs at rest
+ * - FLOATING: Floating elements (4-6) - App bars, floating action buttons
+ * - MODAL: Modal/overlay elevation (8) - Navigation drawers, modal dialogs
+ * - POPUP: Highest elevation (12-16) - Tooltips, dropdown menus, snackbars
+ */
+export const ELEVATION = {
+  /** No elevation - 0 */
+  FLAT: SHADOWS.NONE,
+  /** Minimal elevation - 1 */
+  RAISED: SHADOWS.XS,
+  /** Standard elevation - 2 */
+  LOW: SHADOWS.SM,
+  /** Card elevation - 3 (Most common for cards) */
+  CARD: SHADOWS.MD,
+  /** Button elevation - 4 */
+  BUTTON: SHADOWS.LG,
+  /** Floating element elevation - 6 */
+  FLOATING: SHADOWS.XL,
+  /** Modal elevation - 8 */
+  MODAL: SHADOWS['2XL'],
+  /** Popup elevation - 12 */
+  POPUP: SHADOWS['3XL'],
+  /** Maximum elevation - 16 */
+  MAXIMUM: SHADOWS.MAX,
 } as const;
 
 /**
@@ -279,6 +350,7 @@ export const DIMENSIONS = {
   LAYOUT,
   GRID,
   SHADOWS,
+  ELEVATION,
   RELIGIOUS_DIMENSIONS,
 } as const;
 
