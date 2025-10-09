@@ -1,25 +1,48 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Title, Paragraph, useTheme } from 'react-native-paper';
+
+import { PlaceholderScreen } from '@/components/templates';
 
 const QuranDetailScreen: React.FC = () => {
-  const theme = useTheme();
+  // ==========================================
+  // Variable Declaration/States
+  // ==========================================
+  // (No state variables in this component)
 
+  // ==========================================
+  // Hooks/Custom Hooks
+  // ==========================================
+  // (No hooks in this component)
+
+  // ==========================================
+  // Use Effects
+  // ==========================================
+  // (No useEffect in this component)
+
+  // ==========================================
+  // Helper Methods
+  // ==========================================
+  // (No helper methods in this component)
+
+  // ==========================================
+  // Event Handlers
+  // ==========================================
+  // (No event handlers in this component)
+
+  // ==========================================
+  // Render Methods
+  // ==========================================
+  // (No separate render methods in this component)
+
+  // ==========================================
+  // Return
+  // ==========================================
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <Title>Quran Detail Screen</Title>
-      <Paragraph>Quran recitation and translation tracking will be implemented here.</Paragraph>
-    </View>
+    <PlaceholderScreen
+      title="Quran Detail Screen"
+      description="Quran recitation and translation tracking will be implemented here."
+      emoji="📖"
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-});
 
 export default QuranDetailScreen;

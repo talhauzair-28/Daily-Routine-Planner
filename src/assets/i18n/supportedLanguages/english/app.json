@@ -1,0 +1,57 @@
+{
+  "app": {
+    "name": "Daily Routine Planner",
+    "description": "Plan and track your daily routines",
+    "version": "Version"
+  },
+  "navigation": {
+    "home": "Home",
+    "planner": "Planner",
+    "tasks": "Tasks",
+    "calendar": "Calendar",
+    "statistics": "Statistics",
+    "settings": "Settings",
+    "dashboard": "Dashboard",
+    "today": "Today",
+    "habits": "Habits",
+    "analytics": "Analytics",
+    "prayerDetails": "Prayer Details",
+    "zikrSession": "Zikr Session",
+    "quranSession": "Quran Session",
+    "familyTime": "Family Time",
+    "disciplineChallenges": "Discipline Challenges",
+    "streakDetails": "Streak Details"
+  },
+  "planner": {
+    "title": "Daily Planner",
+    "addTask": "Add Task",
+    "editTask": "Edit Task",
+    "deleteTask": "Delete Task",
+    "markComplete": "Mark Complete",
+    "markIncomplete": "Mark Incomplete",
+    "noTasks": "No tasks for today",
+    "taskName": "Task Name",
+    "taskDescription": "Task Description",
+    "taskTime": "Task Time",
+    "priority": "Priority",
+    "category": "Category"
+  },
+  "tasks": {
+    "allTasks": "All Tasks",
+    "completedTasks": "Completed Tasks",
+    "pendingTasks": "Pending Tasks",
+    "overduetasks": "Overdue Tasks",
+    "taskCompleted": "Task completed successfully",
+    "taskDeleted": "Task deleted successfully",
+    "taskUpdated": "Task updated successfully"
+  },
+  "settings": {
+    "language": "Language",
+    "theme": "Theme",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "about": "About",
+    "help": "Help",
+    "feedback": "Feedback"
+  }
+}

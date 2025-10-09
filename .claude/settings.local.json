@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Read(/Users/talha/Desktop/planner/**)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(tree:*)",
+      "Bash(find:*)",
+      "Bash(npm install)",
+      "Bash(npx tsc:*)",
+      "Bash(claude doctor)",
+      "Bash(npm install:*)",
+      "Bash(npm run lint)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

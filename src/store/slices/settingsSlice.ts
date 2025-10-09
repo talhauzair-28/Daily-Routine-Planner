@@ -42,31 +42,48 @@ const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    updateNotificationSettings: (state, action: PayloadAction<Partial<UserSettings['notifications']>>) => {
+    updateNotificationSettings: (
+      state,
+      action: PayloadAction<Partial<UserSettings['notifications']>>
+    ) => {
       Object.assign(state.notifications, action.payload);
     },
 
-    updatePreferences: (state, action: PayloadAction<Partial<UserSettings['preferences']>>) => {
+    updatePreferences: (
+      state,
+      action: PayloadAction<Partial<UserSettings['preferences']>>
+    ) => {
       Object.assign(state.preferences, action.payload);
     },
 
-    updateGoals: (state, action: PayloadAction<Partial<UserSettings['goals']>>) => {
+    updateGoals: (
+      state,
+      action: PayloadAction<Partial<UserSettings['goals']>>
+    ) => {
       Object.assign(state.goals, action.payload);
     },
 
-    updateStreakTarget: (state, action: PayloadAction<{ habitName: string; target: number }>) => {
-      state.goals.streakTargets[action.payload.habitName] = action.payload.target;
+    updateStreakTarget: (
+      state,
+      action: PayloadAction<{ habitName: string; target: number }>
+    ) => {
+      state.goals.streakTargets[action.payload.habitName] =
+        action.payload.target;
     },
 
-    updateQualityTarget: (state, action: PayloadAction<{ activity: string; target: number }>) => {
-      state.goals.qualityTargets[action.payload.activity] = action.payload.target;
+    updateQualityTarget: (
+      state,
+      action: PayloadAction<{ activity: string; target: number }>
+    ) => {
+      state.goals.qualityTargets[action.payload.activity] =
+        action.payload.target;
     },
 
-    resetToDefaults: (state) => {
+    resetToDefaults: state => {
       Object.assign(state, initialState);
     },
 
-    toggleNotifications: (state) => {
+    toggleNotifications: state => {
       state.notifications.enabled = !state.notifications.enabled;
     },
 

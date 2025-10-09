@@ -2,7 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useTheme } from 'react-native-paper';
+import { Colors } from '@/constants';
+import { TYPOGRAPHY } from '@/constants/design';
+import { t } from '@/utils/i18n';
 
 // Import screens
 import HomeScreen from '@/screens/HomeScreen';
@@ -19,30 +21,49 @@ import FamilyTimeDetailScreen from '@/screens/FamilyTimeDetailScreen';
 import DisciplineChallengesScreen from '@/screens/DisciplineChallengesScreen';
 import StreakDetailScreen from '@/screens/StreakDetailScreen';
 
-export type RootStackParamList = {
-  Main: undefined;
-  PrayerDetail: { prayerId: string };
-  ZikrDetail: { sessionId: string };
-  QuranDetail: undefined;
-  FamilyTimeDetail: { familyTimeId?: string };
-  DisciplineChallenges: undefined;
-  StreakDetail: { habitName: string };
-};
+// Import route constants
+import { ROUTES, RouteParams } from './routes';
 
-export type TabParamList = {
-  Home: undefined;
-  Today: undefined;
-  Habits: undefined;
-  Analytics: undefined;
-  Settings: undefined;
-};
+export type RootStackParamList = RouteParams;
+export type TabParamList = Pick<RouteParams, typeof ROUTES.HOME | typeof ROUTES.TODAY | typeof ROUTES.HABITS | typeof ROUTES.ANALYTICS | typeof ROUTES.SETTINGS>;
 
 const Tab = createBottomTabNavigator<TabParamList>();
 const Stack = createStackNavigator<RootStackParamList>();
 
 const TabNavigator: React.FC = () => {
-  const theme = useTheme();
+  // ==========================================
+  // Variable Declaration/States
+  // ==========================================
+  // (No state variables in this component)
 
+  // ==========================================
+  // Hooks/Custom Hooks
+  // ==========================================
+  // Using Colors from design system
+
+  // ==========================================
+  // Use Effects
+  // ==========================================
+  // (No useEffect in this component)
+
+  // ==========================================
+  // Helper Methods
+  // ==========================================
+  // (No helper methods in this component)
+
+  // ==========================================
+  // Event Handlers
+  // ==========================================
+  // (Event handlers are inline in this component)
+
+  // ==========================================
+  // Render Methods
+  // ==========================================
+  // (No separate render methods in this component)
+
+  // ==========================================
+  // Return
+  // ==========================================
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -50,19 +71,19 @@ const TabNavigator: React.FC = () => {
           let iconName: string;
 
           switch (route.name) {
-            case 'Home':
+            case ROUTES.HOME:
               iconName = focused ? 'home' : 'home-outline';
               break;
-            case 'Today':
+            case ROUTES.TODAY:
               iconName = focused ? 'calendar-today' : 'calendar-today';
               break;
-            case 'Habits':
+            case ROUTES.HABITS:
               iconName = focused ? 'chart-line' : 'chart-line-variant';
               break;
-            case 'Analytics':
+            case ROUTES.ANALYTICS:
               iconName = focused ? 'chart-box' : 'chart-box-outline';
               break;
-            case 'Settings':
+            case ROUTES.SETTINGS:
               iconName = focused ? 'cog' : 'cog-outline';
               break;
             default:
@@ -71,96 +92,96 @@ const TabNavigator: React.FC = () => {
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: Colors.textSecondary,
         tabBarStyle: {
-          backgroundColor: theme.colors.surface,
-          borderTopColor: theme.colors.outline,
+          backgroundColor: Colors.surface,
+          borderTopColor: Colors.border,
         },
         headerStyle: {
-          backgroundColor: theme.colors.surface,
+          backgroundColor: Colors.surface,
         },
-        headerTintColor: theme.colors.onSurface,
+        headerTintColor: Colors.text,
       })}
     >
-      <Tab.Screen 
-        name="Home" 
+      <Tab.Screen
+        name={ROUTES.HOME}
         component={HomeScreen}
-        options={{ title: 'Dashboard' }}
+        options={{ title: t('app.navigation.dashboard') }}
       />
-      <Tab.Screen 
-        name="Today" 
+      <Tab.Screen
+        name={ROUTES.TODAY}
         component={TodayScreen}
-        options={{ title: 'Today' }}
+        options={{ title: t('app.navigation.today') }}
       />
-      <Tab.Screen 
-        name="Habits" 
+      <Tab.Screen
+        name={ROUTES.HABITS}
         component={HabitsScreen}
-        options={{ title: 'Habits' }}
+        options={{ title: t('app.navigation.habits') }}
       />
-      <Tab.Screen 
-        name="Analytics" 
+      <Tab.Screen
+        name={ROUTES.ANALYTICS}
         component={AnalyticsScreen}
-        options={{ title: 'Analytics' }}
+        options={{ title: t('app.navigation.analytics') }}
       />
-      <Tab.Screen 
-        name="Settings" 
+      <Tab.Screen
+        name={ROUTES.SETTINGS}
         component={SettingsScreen}
-        options={{ title: 'Settings' }}
+        options={{ title: t('settings') }}
       />
     </Tab.Navigator>
   );
 };
 
 const AppNavigator: React.FC = () => {
-  const theme = useTheme();
+  // Using Colors from design system
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.colors.surface,
+          backgroundColor: Colors.surface,
         },
-        headerTintColor: theme.colors.onSurface,
+        headerTintColor: Colors.text,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          ...TYPOGRAPHY.h5,
         },
       }}
     >
-      <Stack.Screen 
-        name="Main" 
+      <Stack.Screen
+        name={ROUTES.MAIN}
         component={TabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen 
-        name="PrayerDetail" 
+      <Stack.Screen
+        name={ROUTES.PRAYER_DETAIL}
         component={PrayerDetailScreen}
-        options={{ title: 'Prayer Details' }}
+        options={{ title: t('app.navigation.prayerDetails') }}
       />
-      <Stack.Screen 
-        name="ZikrDetail" 
+      <Stack.Screen
+        name={ROUTES.ZIKR_DETAIL}
         component={ZikrDetailScreen}
-        options={{ title: 'Zikr Session' }}
+        options={{ title: t('app.navigation.zikrSession') }}
       />
-      <Stack.Screen 
-        name="QuranDetail" 
+      <Stack.Screen
+        name={ROUTES.QURAN_DETAIL}
         component={QuranDetailScreen}
-        options={{ title: 'Quran Session' }}
+        options={{ title: t('app.navigation.quranSession') }}
       />
-      <Stack.Screen 
-        name="FamilyTimeDetail" 
+      <Stack.Screen
+        name={ROUTES.FAMILY_TIME_DETAIL}
         component={FamilyTimeDetailScreen}
-        options={{ title: 'Family Time' }}
+        options={{ title: t('app.navigation.familyTime') }}
       />
-      <Stack.Screen 
-        name="DisciplineChallenges" 
+      <Stack.Screen
+        name={ROUTES.DISCIPLINE_CHALLENGES}
         component={DisciplineChallengesScreen}
-        options={{ title: 'Discipline Challenges' }}
+        options={{ title: t('app.navigation.disciplineChallenges') }}
       />
-      <Stack.Screen 
-        name="StreakDetail" 
+      <Stack.Screen
+        name={ROUTES.STREAK_DETAIL}
         component={StreakDetailScreen}
-        options={{ title: 'Streak Details' }}
+        options={{ title: t('app.navigation.streakDetails') }}
       />
     </Stack.Navigator>
   );

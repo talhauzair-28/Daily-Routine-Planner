@@ -1,30 +1,47 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, Text, useTheme } from 'react-native-paper';
+import { Loading } from './atoms';
 
 const LoadingScreen: React.FC = () => {
-  const theme = useTheme();
+  // ==========================================
+  // Variable Declaration/States
+  // ==========================================
+  // (No state variables in this component)
 
+  // ==========================================
+  // Hooks/Custom Hooks
+  // ==========================================
+  // (No hooks in this component)
+
+  // ==========================================
+  // Use Effects
+  // ==========================================
+  // (No useEffect in this component)
+
+  // ==========================================
+  // Helper Methods
+  // ==========================================
+  // (No helper methods in this component)
+
+  // ==========================================
+  // Event Handlers
+  // ==========================================
+  // (No event handlers in this component)
+
+  // ==========================================
+  // Render Methods
+  // ==========================================
+  // (No separate render methods in this component)
+
+  // ==========================================
+  // Return
+  // ==========================================
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <ActivityIndicator size="large" color={theme.colors.primary} />
-      <Text style={[styles.text, { color: theme.colors.onBackground }]}>
-        Loading Daily Routine Planner...
-      </Text>
-    </View>
+    <Loading
+      fullScreen={true}
+      text="Loading Daily Routine Planner..."
+      size="large"
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    marginTop: 16,
-    fontSize: 16,
-  },
-});
 
 export default LoadingScreen;

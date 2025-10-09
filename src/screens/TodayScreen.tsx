@@ -1,64 +1,109 @@
 import { useNavigation } from '@react-navigation/native';
+import type { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Card, FAB, Paragraph, Title, useTheme } from 'react-native-paper';
+import { FAB } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
 
+import { Text, Card, Button } from '@/components/atoms';
+
 import { Colors } from '@/constants/Colors';
+import { ICON_SIZES, SPACING } from '@/constants/design/Dimensions';
+import { ButtonVariant } from '@/models/enums';
 import { RootState } from '@/store';
+import type { RootStackParamList } from '@/navigation/AppNavigator';
+import { ROUTES } from '@/navigation/routes';
 
 const TodayScreen: React.FC = () => {
-  const theme = useTheme();
-  const navigation = useNavigation();
-  
-  const { todayRecord } = useSelector((state: RootState) => state.habits);
-  // Removed unused variables
-  // const { todayChallenges } = useSelector((state: RootState) => state.discipline);
-  // const getQualityColor = (quality: number) => { ... };
+  // ==========================================
+  // Variable Declaration/States
+  // ==========================================
+  // (No state variables in this component)
 
+  // ==========================================
+  // Hooks/Custom Hooks
+  // ==========================================
+  // (No hooks in this component)
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const todayRecord = useSelector((state: RootState) => state.habits.todayRecord);
+
+  // ==========================================
+  // Use Effects
+  // ==========================================
+  // (No useEffect in this component)
+
+  // ==========================================
+  // Helper Methods
+  // ==========================================
+  // (No helper methods in this component)
+
+  // ==========================================
+  // Event Handlers
+  // ==========================================
+  // (Event handlers are inline in this component)
+
+  // ==========================================
+  // Render Methods
+  // ==========================================
   const renderStars = (quality: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <Icon
         key={index}
         name={index < quality ? 'star' : 'star-outline'}
-        size={16}
+        size={ICON_SIZES.SM}
         color={index < quality ? Colors.accent : Colors.textSecondary}
       />
     ));
   };
 
+  // ==========================================
+  // Return
+  // ==========================================
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View style={[styles.container, { backgroundColor: Colors.background }]}>
       <ScrollView style={styles.scrollView}>
         {/* Today's Overview */}
         <Card style={styles.card}>
-          <Card.Content>
-            <Title>Today&apos;s Progress</Title>
-            <Paragraph style={{ color: theme.colors.onSurfaceVariant }}>
-              {todayRecord?.dayOfWeek} - {todayRecord?.workType === 'office' ? 'Office Day' : 
-               todayRecord?.workType === 'wfh' ? 'Work From Home' : 'Weekend'}
-            </Paragraph>
-          </Card.Content>
+            <Text variant="h4" color="text">
+              Today&apos;s Progress
+            </Text>
+            <Text variant="body" color="textSecondary">
+              {todayRecord?.dayOfWeek} -{' '}
+              {todayRecord?.workType === 'office'
+                ? 'Office Day'
+                : todayRecord?.workType === 'wfh'
+                  ? 'Work From Home'
+                  : 'Weekend'}
+            </Text>
         </Card>
 
         {/* Prayers Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
-              <Icon name="mosque" size={24} color={Colors.spiritual} />
-              <Title style={styles.sectionTitle}>Prayers</Title>
+              <Icon
+                name="mosque"
+                size={ICON_SIZES.LG}
+                color={Colors.spiritual}
+              />
+              <Text variant="h5" color="text" style={styles.sectionTitle}>
+                Prayers
+              </Text>
             </View>
-            {todayRecord?.prayers.map((prayer) => (
+            {todayRecord?.prayers.map(prayer => (
               <View key={prayer.id} style={styles.activityItem}>
                 <View style={styles.activityInfo}>
-                  <Paragraph style={styles.activityName}>
+                  <Text variant="body" color="text" style={styles.activityName}>
                     {prayer.name}
-                  </Paragraph>
-                  <Paragraph style={styles.activityTime}>
+                  </Text>
+                  <Text
+                    variant="caption"
+                    color="textSecondary"
+                    style={styles.activityTime}
+                  >
                     Target: {prayer.targetTime}
                     {prayer.actualTime && ` | Actual: ${prayer.actualTime}`}
-                  </Paragraph>
+                  </Text>
                   <View style={styles.qualityStars}>
                     {renderStars(prayer.quality)}
                   </View>
@@ -66,122 +111,162 @@ const TodayScreen: React.FC = () => {
                 <View style={styles.activityStatus}>
                   <Icon
                     name={prayer.completed ? 'check-circle' : 'clock-outline'}
-                    size={24}
+                    size={ICON_SIZES.LG}
                     color={prayer.completed ? Colors.success : Colors.warning}
                   />
                 </View>
               </View>
             ))}
-            <Button 
-              mode="outlined" 
-              onPress={() => navigation.navigate('PrayerDetail' as never, { prayerId: 'fajr' } as never)}
-              style={styles.detailButton}
-            >
-              Manage Prayers
-            </Button>
-          </Card.Content>
+            <Button
+              variant={ButtonVariant.OUTLINED}
+              title="Manage Prayers"
+              onPress={() => navigation.navigate(ROUTES.PRAYER_DETAIL, { prayerId: 'fajr' })}
+              buttonStyle={styles.detailButton}
+            />
         </Card>
 
         {/* Zikr Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
-              <Icon name="hands-pray" size={24} color={Colors.spiritual} />
-              <Title style={styles.sectionTitle}>Zikr Sessions</Title>
+              <Icon
+                name="hands-pray"
+                size={ICON_SIZES.LG}
+                color={Colors.spiritual}
+              />
+              <Text variant="h5" color="text" style={styles.sectionTitle}>
+                Zikr Sessions
+              </Text>
             </View>
-            {todayRecord?.zikrSessions.map((session) => (
+            {todayRecord?.zikrSessions.map(session => (
               <View key={session.id} style={styles.activityItem}>
                 <View style={styles.activityInfo}>
-                  <Paragraph style={styles.activityName}>
-                    {session.type === 'morning' ? 'Morning Zikr' : 'Evening Zikr'}
-                  </Paragraph>
-                  <Paragraph style={styles.activityTime}>
+                  <Text variant="body" color="text" style={styles.activityName}>
+                    {session.type === 'morning'
+                      ? 'Morning Zikr'
+                      : 'Evening Zikr'}
+                  </Text>
+                  <Text
+                    variant="caption"
+                    color="textSecondary"
+                    style={styles.activityTime}
+                  >
                     40 minutes session
-                  </Paragraph>
+                  </Text>
                   <View style={styles.qualityStars}>
                     {renderStars(session.quality)}
                   </View>
                   <View style={styles.zikrProgress}>
-                    <Paragraph style={styles.progressText}>
-                      Progress: {Object.values(session.subtasks).reduce((acc, task) => 
-                        acc + task.completed, 0)}/1200 total
-                    </Paragraph>
+                    <Text
+                      variant="captionSmall"
+                      color="textSecondary"
+                      style={styles.progressText}
+                    >
+                      Progress:{' '}
+                      {Object.values(session.subtasks).reduce(
+                        (acc, task) => acc + task.completed,
+                        0
+                      )}
+                      /1200 total
+                    </Text>
                   </View>
                 </View>
                 <View style={styles.activityStatus}>
                   <Icon
                     name={session.completed ? 'check-circle' : 'clock-outline'}
-                    size={24}
+                    size={ICON_SIZES.LG}
                     color={session.completed ? Colors.success : Colors.warning}
                   />
                 </View>
               </View>
             ))}
-            <Button 
-              mode="outlined" 
-              onPress={() => navigation.navigate('ZikrDetail' as never, { sessionId: 'morning-zikr' } as never)}
-              style={styles.detailButton}
-            >
-              Start Zikr Session
-            </Button>
-          </Card.Content>
+            <Button
+              variant={ButtonVariant.OUTLINED}
+              title="Start Zikr Session"
+              onPress={() => navigation.navigate(ROUTES.ZIKR_DETAIL, { sessionId: 'morning-zikr' })}
+              buttonStyle={styles.detailButton}
+            />
         </Card>
 
         {/* Quran Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
-              <Icon name="book-open" size={24} color={Colors.primary} />
-              <Title style={styles.sectionTitle}>Quran Recitation</Title>
+              <Icon
+                name="book-open"
+                size={ICON_SIZES.LG}
+                color={Colors.primary}
+              />
+              <Text variant="h5" color="text" style={styles.sectionTitle}>
+                Quran Recitation
+              </Text>
             </View>
             <View style={styles.quranSessions}>
               <View style={styles.quranSession}>
-                <Paragraph style={styles.sessionType}>Arabic Recitation</Paragraph>
+                <Text variant="body" color="text" style={styles.sessionType}>
+                  Arabic Recitation
+                </Text>
                 <View style={styles.qualityStars}>
-                  {renderStars(todayRecord?.quranSession.arabicRecitation.quality || 1)}
+                  {renderStars(
+                    todayRecord?.quranSession.arabicRecitation.quality || 1
+                  )}
                 </View>
-                <Paragraph style={styles.duration}>
-                  {todayRecord?.quranSession.arabicRecitation.duration || 0} minutes
-                </Paragraph>
+                <Text
+                  variant="caption"
+                  color="textSecondary"
+                  style={styles.duration}
+                >
+                  {todayRecord?.quranSession.arabicRecitation.duration || 0}{' '}
+                  minutes
+                </Text>
               </View>
               <View style={styles.quranSession}>
-                <Paragraph style={styles.sessionType}>Translation & Reflection</Paragraph>
+                <Text variant="body" color="text" style={styles.sessionType}>
+                  Translation & Reflection
+                </Text>
                 <View style={styles.qualityStars}>
-                  {renderStars(todayRecord?.quranSession.translation.quality || 1)}
+                  {renderStars(
+                    todayRecord?.quranSession.translation.quality || 1
+                  )}
                 </View>
-                <Paragraph style={styles.duration}>
+                <Text
+                  variant="caption"
+                  color="textSecondary"
+                  style={styles.duration}
+                >
                   {todayRecord?.quranSession.translation.duration || 0} minutes
-                </Paragraph>
+                </Text>
               </View>
             </View>
-            <Button 
-              mode="outlined" 
-              onPress={() => navigation.navigate('QuranDetail' as never)}
-              style={styles.detailButton}
-            >
-              Log Quran Session
-            </Button>
-          </Card.Content>
+            <Button
+              variant={ButtonVariant.OUTLINED}
+              title="Log Quran Session"
+              onPress={() => navigation.navigate(ROUTES.QURAN_DETAIL)}
+              buttonStyle={styles.detailButton}
+            />
         </Card>
 
         {/* Family Time Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
-              <Icon name="heart" size={24} color={Colors.family} />
-              <Title style={styles.sectionTitle}>Family Time</Title>
+              <Icon name="heart" size={ICON_SIZES.LG} color={Colors.family} />
+              <Text variant="h5" color="text" style={styles.sectionTitle}>
+                Family Time
+              </Text>
             </View>
             {todayRecord?.familyTime.length === 0 ? (
-              <Paragraph style={{ color: theme.colors.onSurfaceVariant }}>
+              <Text variant="body" color="textSecondary">
                 No family time logged yet today
-              </Paragraph>
+              </Text>
             ) : (
-              todayRecord?.familyTime.map((ft) => (
+              todayRecord?.familyTime.map(ft => (
                 <View key={ft.id} style={styles.activityItem}>
                   <View style={styles.activityInfo}>
-                    <Paragraph style={styles.activityName}>
+                    <Text
+                      variant="body"
+                      color="text"
+                      style={styles.activityName}
+                    >
                       {ft.timeSlot} - {ft.duration} minutes
-                    </Paragraph>
+                    </Text>
                     <View style={styles.qualityStars}>
                       {renderStars(ft.quality)}
                     </View>
@@ -189,41 +274,51 @@ const TodayScreen: React.FC = () => {
                 </View>
               ))
             )}
-            <Button 
-              mode="outlined" 
-              onPress={() => navigation.navigate('FamilyTimeDetail' as never)}
-              style={styles.detailButton}
-            >
-              Log Family Time
-            </Button>
-          </Card.Content>
+            <Button
+              variant={ButtonVariant.OUTLINED}
+              title="Log Family Time"
+              onPress={() => navigation.navigate(ROUTES.FAMILY_TIME_DETAIL)}
+              buttonStyle={styles.detailButton}
+            />
         </Card>
 
         {/* Exercise Section */}
         <Card style={styles.card}>
-          <Card.Content>
             <View style={styles.sectionHeader}>
-              <Icon name="dumbbell" size={24} color={Colors.accent} />
-              <Title style={styles.sectionTitle}>Exercise</Title>
+              <Icon
+                name="dumbbell"
+                size={ICON_SIZES.LG}
+                color={Colors.accent}
+              />
+              <Text variant="h5" color="text" style={styles.sectionTitle}>
+                Exercise
+              </Text>
             </View>
             <View style={styles.exerciseProgress}>
               <View style={styles.exerciseComponent}>
-                <Paragraph>Warm-up: {todayRecord?.exercise.warmup.completed ? '✅' : '⏳'}</Paragraph>
+                <Text variant="body" color="text">
+                  Warm-up:{' '}
+                  {todayRecord?.exercise.warmup.completed ? '✅' : '⏳'}
+                </Text>
               </View>
               <View style={styles.exerciseComponent}>
-                <Paragraph>
-                  Main Activity: {todayRecord?.exercise.mainActivity.completed ? '✅' : '⏳'}
-                  {todayRecord?.exercise.mainActivity.activity && ` (${todayRecord.exercise.mainActivity.activity})`}
-                </Paragraph>
+                <Text variant="body" color="text">
+                  Main Activity:{' '}
+                  {todayRecord?.exercise.mainActivity.completed ? '✅' : '⏳'}
+                  {todayRecord?.exercise.mainActivity.activity &&
+                    ` (${todayRecord.exercise.mainActivity.activity})`}
+                </Text>
               </View>
               <View style={styles.exerciseComponent}>
-                <Paragraph>Cool-down: {todayRecord?.exercise.cooldown.completed ? '✅' : '⏳'}</Paragraph>
+                <Text variant="body" color="text">
+                  Cool-down:{' '}
+                  {todayRecord?.exercise.cooldown.completed ? '✅' : '⏳'}
+                </Text>
               </View>
             </View>
             <View style={styles.qualityStars}>
               {renderStars(todayRecord?.exercise.quality || 1)}
             </View>
-          </Card.Content>
         </Card>
 
         <View style={styles.bottomPadding} />
@@ -231,9 +326,9 @@ const TodayScreen: React.FC = () => {
 
       {/* Floating Action Button */}
       <FAB
-        icon="plus"
-        style={[styles.fab, { backgroundColor: theme.colors.primary }]}
-        onPress={() => navigation.navigate('DisciplineChallenges' as never)}
+        icon={<Icon name="plus" size={ICON_SIZES.LG} color="white" />}
+        buttonStyle={[styles.fab, { backgroundColor: Colors.primary }]}
+        onPress={() => navigation.navigate(ROUTES.DISCIPLINE_CHALLENGES)}
       />
     </View>
   );
@@ -244,24 +339,24 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    padding: 16,
+    padding: SPACING.MD,
   },
   card: {
-    marginBottom: 16,
+    marginBottom: SPACING.MD,
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: SPACING.SM + SPACING.XS, // 12px
   },
   sectionTitle: {
-    marginLeft: 8,
+    marginLeft: SPACING.SM,
   },
   activityItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: SPACING.SM,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
   },
@@ -269,57 +364,49 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   activityName: {
-    fontWeight: 'bold',
-    marginBottom: 4,
+    marginBottom: SPACING.XS,
   },
   activityTime: {
-    fontSize: 12,
-    color: Colors.textSecondary,
-    marginBottom: 4,
+    marginBottom: SPACING.XS,
   },
   activityStatus: {
-    marginLeft: 12,
+    marginLeft: SPACING.SM + SPACING.XS, // 12px
   },
   qualityStars: {
     flexDirection: 'row',
-    marginTop: 4,
+    marginTop: SPACING.XS,
   },
   detailButton: {
-    marginTop: 12,
+    marginTop: SPACING.SM + SPACING.XS, // 12px
   },
   zikrProgress: {
-    marginTop: 4,
+    marginTop: SPACING.XS,
   },
   progressText: {
-    fontSize: 12,
-    color: Colors.textSecondary,
   },
   quranSessions: {
-    marginBottom: 12,
+    marginBottom: SPACING.SM + SPACING.XS, // 12px
   },
   quranSession: {
-    paddingVertical: 8,
+    paddingVertical: SPACING.SM,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
   },
   sessionType: {
-    fontWeight: 'bold',
-    marginBottom: 4,
+    marginBottom: SPACING.XS,
   },
   duration: {
-    fontSize: 12,
-    color: Colors.textSecondary,
-    marginTop: 4,
+    marginTop: SPACING.XS,
   },
   exerciseProgress: {
-    marginBottom: 12,
+    marginBottom: SPACING.SM + SPACING.XS, // 12px
   },
   exerciseComponent: {
-    paddingVertical: 4,
+    paddingVertical: SPACING.XS,
   },
   fab: {
     position: 'absolute',
-    margin: 16,
+    margin: SPACING.MD,
     right: 0,
     bottom: 0,
   },

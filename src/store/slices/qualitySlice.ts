@@ -63,39 +63,63 @@ const qualitySlice = createSlice({
   name: 'quality',
   initialState,
   reducers: {
-    updateDailyAverages: (state, action: PayloadAction<Partial<QualityState['dailyAverages']>>) => {
+    updateDailyAverages: (
+      state,
+      action: PayloadAction<Partial<QualityState['dailyAverages']>>
+    ) => {
       Object.assign(state.dailyAverages, action.payload);
     },
 
-    updateQualityGoals: (state, action: PayloadAction<Partial<QualityState['qualityGoals']>>) => {
+    updateQualityGoals: (
+      state,
+      action: PayloadAction<Partial<QualityState['qualityGoals']>>
+    ) => {
       Object.assign(state.qualityGoals, action.payload);
     },
 
-    addWeeklyTrend: (state, action: PayloadAction<{ week: string; averages: QualityState['dailyAverages'] }>) => {
+    addWeeklyTrend: (
+      state,
+      action: PayloadAction<{
+        week: string;
+        averages: QualityState['dailyAverages'];
+      }>
+    ) => {
       state.weeklyTrends[action.payload.week] = action.payload.averages;
     },
 
     calculateQualityFromDailyRecord: (state, action: PayloadAction<any>) => {
       const record = action.payload;
-      
+
       // Calculate prayer quality average
       const prayerQualities = record.prayers.map((p: any) => p.quality);
-      const prayerAvg = prayerQualities.length > 0 ? 
-        prayerQualities.reduce((sum: number, q: number) => sum + q, 0) / prayerQualities.length : 0;
-      
+      const prayerAvg =
+        prayerQualities.length > 0
+          ? prayerQualities.reduce((sum: number, q: number) => sum + q, 0) /
+            prayerQualities.length
+          : 0;
+
       // Calculate Zikr quality average
       const zikrQualities = record.zikrSessions.map((z: any) => z.quality);
-      const zikrAvg = zikrQualities.length > 0 ?
-        zikrQualities.reduce((sum: number, q: number) => sum + q, 0) / zikrQualities.length : 0;
-      
+      const zikrAvg =
+        zikrQualities.length > 0
+          ? zikrQualities.reduce((sum: number, q: number) => sum + q, 0) /
+            zikrQualities.length
+          : 0;
+
       // Calculate Quran quality average
-      const quranAvg = (record.quranSession.arabicRecitation.quality + record.quranSession.translation.quality) / 2;
-      
+      const quranAvg =
+        (record.quranSession.arabicRecitation.quality +
+          record.quranSession.translation.quality) /
+        2;
+
       // Calculate family time quality average
       const familyQualities = record.familyTime.map((ft: any) => ft.quality);
-      const familyAvg = familyQualities.length > 0 ?
-        familyQualities.reduce((sum: number, q: number) => sum + q, 0) / familyQualities.length : 0;
-      
+      const familyAvg =
+        familyQualities.length > 0
+          ? familyQualities.reduce((sum: number, q: number) => sum + q, 0) /
+            familyQualities.length
+          : 0;
+
       // Update daily averages
       state.dailyAverages = {
         prayers: prayerAvg,
