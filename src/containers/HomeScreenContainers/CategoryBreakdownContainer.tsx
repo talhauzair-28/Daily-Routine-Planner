@@ -17,6 +17,7 @@ import { CategoryCard, ScreenSection } from '@/components/templates';
 import { Colors } from '@/constants/Colors';
 import { RootState } from '@/store';
 import { getScoreColor } from '@/utils';
+import { t } from '@/utils/i18n';
 
 /**
  * CategoryBreakdownContainer Component
@@ -37,21 +38,21 @@ const CategoryBreakdownContainer: React.FC = () => {
   const categories = [
     {
       key: 'timing' as const,
-      label: 'Timing',
+      label: t('timing'),
       icon: 'clock-outline',
       iconColor: Colors.primary,
       maxScore: 11,
     },
     {
       key: 'spiritual' as const,
-      label: 'Spiritual',
+      label: t('spiritual'),
       icon: 'mosque',
       iconColor: Colors.spiritual,
       maxScore: 9,
     },
     {
       key: 'family' as const,
-      label: 'Family',
+      label: t('family'),
       icon: 'heart-multiple',
       iconColor: Colors.family,
       maxScore: 4,
@@ -120,7 +121,7 @@ const CategoryBreakdownContainer: React.FC = () => {
   // ==========================================
   return (
     <ScreenSection
-      title="Category Breakdown"
+      title={t('categoryBreakdown')}
       icon="view-grid"
       iconColor={Colors.secondary}
     >

@@ -359,6 +359,95 @@ const HomeScreen = () => {
 
 ## 🔧 **IMPLEMENTATION STANDARDS**
 
+### **🌍 INTERNATIONALIZATION (i18n) - MANDATORY REQUIREMENT**
+
+#### **🚫 NEVER Use Hardcoded Strings**
+```typescript
+// ❌ BAD: Hardcoded strings
+const welcomeText = "Welcome";
+const saveButton = "Save";
+const errorMessage = "Something went wrong";
+
+// ✅ GOOD: Always use i18n
+import { t } from '@/utils/i18n';
+const welcomeText = t('welcome');
+const saveButton = t('save');
+const errorMessage = t('error');
+```
+
+#### **🎯 i18n Implementation Rules**
+```typescript
+// ✅ MANDATORY: Import i18n utility
+import { t, translate, setAppLanguage } from '@/utils/i18n';
+
+// ✅ GOOD: Use translation keys for all user-facing text
+const MyComponent = () => {
+  return (
+    <View>
+      <Text>{t('welcome')}</Text>
+      <Button title={t('save')} />
+      <Text>{t('app.planner.title')}</Text>
+    </View>
+  );
+};
+
+// ✅ GOOD: Use translate with fallback for safety
+const description = translate('tasks.noTasks', 'No tasks available');
+
+// ✅ GOOD: Dynamic translations with variables
+const greeting = t('hello', { name: userName });
+```
+
+#### **📚 Translation Key Structure**
+```typescript
+// Use dot notation for nested keys:
+t('common.save')           // Basic UI elements
+t('app.navigation.home')   // App-specific content
+t('planner.addTask')       // Feature-specific content
+t('settings.language')     // Settings content
+```
+
+#### **🔧 Language Management**
+```typescript
+// ✅ Initialize language on app start
+useEffect(() => {
+  initializeLanguage();
+}, []);
+
+// ✅ Change language programmatically
+const handleLanguageChange = async (languageCode: string) => {
+  await setAppLanguage(languageCode);
+  // App will automatically re-render with new language
+};
+
+// ✅ Check if current language is RTL
+const isRightToLeft = isRTL();
+```
+
+#### **⚠️ i18n Anti-Patterns**
+```typescript
+// ❌ NEVER: Hardcoded strings in JSX
+<Text>Welcome to the app</Text>
+
+// ❌ NEVER: Hardcoded button titles
+<Button title="Save Changes" />
+
+// ❌ NEVER: Hardcoded alert messages
+Alert.alert("Error", "Something went wrong");
+
+// ❌ NEVER: Hardcoded navigation labels
+<Tab.Screen name="Home" options={{ title: "Home" }} />
+```
+
+#### **✅ i18n Best Practices**
+1. **ALWAYS** use `t()` for user-facing text
+2. **NEVER** hardcode strings, even for debugging
+3. **GROUP** related translations in JSON files
+4. **USE** descriptive translation keys
+5. **SUPPORT** RTL languages (Arabic, Urdu, Hebrew)
+6. **TEST** app in multiple languages
+7. **FALLBACK** to English if translation missing
+
 ### **📥 Import Organization (STRICT ORDER)**
 ```typescript
 // 1. React/React Native
@@ -368,16 +457,19 @@ import { View, Text } from 'react-native';
 // 2. Third-party libraries
 import { Button } from 'react-native-elements';
 
-// 3. Design system (centralized)
+// 3. Internationalization (MANDATORY)
+import { t, translate } from '@/utils/i18n';
+
+// 4. Design system (centralized)
 import { Colors, SPACING, Size } from '@/constants/design';
 
-// 4. Utilities (centralized)
+// 5. Utilities (centralized)
 import { getQualityColor, formatTime } from '@/utils';
 
-// 5. Types
+// 6. Types
 import { Prayer, Habit } from '@/types';
 
-// 6. Local components
+// 7. Local components
 import { Card, Badge } from '../atoms';
 ```
 
@@ -496,10 +588,14 @@ import {
 - [ ] All utilities properly imported
 - [ ] No unused imports
 - [ ] Consistent import order
+- [ ] **MANDATORY: No hardcoded strings - all text uses i18n**
+- [ ] **MANDATORY: i18n utility imported where needed**
+- [ ] **MANDATORY: Translation keys follow dot notation structure**
 - [ ] Islamic context preserved
 - [ ] Type safety maintained
 - [ ] No hardcoded elevation/shadow values - use ELEVATION system
 - [ ] Cross-platform shadow compatibility ensured
+- [ ] RTL language support considered
 
 ## 🛠️ **TOOLS & AUTOMATION**
 
@@ -527,20 +623,31 @@ import {
 # Check for potential duplicates before commit
 grep -r "const get.*Color" src/components/ && echo "⚠️  Potential color function duplication!"
 grep -r "const format" src/components/ && echo "⚠️  Potential format function duplication!"
+
+# Check for hardcoded strings (i18n violations)
+grep -r '"[A-Z].*"' src/components/ src/screens/ && echo "⚠️  Potential hardcoded strings found!"
+grep -r "'[A-Z].*'" src/components/ src/screens/ && echo "⚠️  Potential hardcoded strings found!"
+grep -r "title.*:" src/ | grep -v "t(" && echo "⚠️  Potential hardcoded button/screen titles!"
 ```
 
 ## 📊 **MONITORING & MAINTENANCE**
 
 ### **🔄 Regular Cleanup Tasks**
 - **Weekly**: Search for new duplicate patterns
+- **Weekly**: Scan for hardcoded strings using pre-commit hooks
 - **Monthly**: Audit component functions for centralization opportunities
+- **Monthly**: Review translation coverage and missing keys
 - **Before releases**: Full codebase duplicate scan
+- **Before releases**: Complete i18n audit for all user-facing text
 
 ### **📈 Success Metrics**
 - **Zero duplicate functions** across components
 - **All utilities centralized** in `/src/utils/`
 - **Consistent import patterns** across files
 - **Islamic context preserved** and centralized
+- **Zero hardcoded strings** in user-facing components
+- **Complete translation coverage** for all supported languages
+- **RTL support** working correctly for Arabic/Urdu
 
 ---
 
@@ -553,8 +660,10 @@ Just as we purify ourselves spiritually, we must purify our code from duplicatio
 ### **🌟 Golden Rules:**
 1. **SEARCH BEFORE CREATE** - Always check existing utilities
 2. **CENTRALIZE IMMEDIATELY** - Don't wait for "later"
-3. **IMPORT ONLY NEEDED** - Keep imports clean
-4. **DOCUMENT EVERYTHING** - Help your future self
-5. **MAINTAIN ISLAMIC CONTEXT** - Preserve religious authenticity
+3. **NEVER HARDCODE STRINGS** - Always use i18n for user-facing text
+4. **IMPORT ONLY NEEDED** - Keep imports clean
+5. **DOCUMENT EVERYTHING** - Help your future self
+6. **MAINTAIN ISLAMIC CONTEXT** - Preserve religious authenticity
+7. **SUPPORT ALL LANGUAGES** - Ensure RTL and translation coverage
 
 **May Allah bless our efforts to write clean, maintainable code that serves the Muslim community!** 🕌

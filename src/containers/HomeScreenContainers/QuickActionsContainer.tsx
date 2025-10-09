@@ -17,6 +17,7 @@ import { Button } from '@/components/atoms';
 import { ScreenSection } from '@/components/templates';
 import { Colors } from '@/constants/Colors';
 import { ICON_SIZES, SPACING } from '@/constants/design/Dimensions';
+import { t } from '@/utils/i18n';
 
 /**
  * Action button configuration interface
@@ -66,25 +67,25 @@ const QuickActionsContainer: React.FC<QuickActionsContainerProps> = ({
   // ==========================================
   const actionButtons: ActionButton[] = [
     {
-      title: "Today's Progress",
+      title: t('todaysProgress'),
       icon: 'today',
       backgroundColor: Colors.primary,
       onPress: onNavigateToToday,
     },
     {
-      title: 'Log Quality',
+      title: t('logQuality'),
       icon: 'star',
       backgroundColor: Colors.secondary,
       onPress: onNavigateToDiscipline,
     },
     {
-      title: 'View Analytics',
+      title: t('viewAnalytics'),
       icon: 'chart-line',
       backgroundColor: Colors.accent,
       onPress: onNavigateToAnalytics,
     },
     {
-      title: 'Habits',
+      title: t('habits'),
       icon: 'format-list-checks',
       backgroundColor: Colors.spiritual,
       onPress: onNavigateToHabits,
@@ -143,7 +144,7 @@ const QuickActionsContainer: React.FC<QuickActionsContainerProps> = ({
   // ==========================================
   return (
     <ScreenSection
-      title="Quick Actions"
+      title={t('quickActions')}
       icon="lightning-bolt"
       iconColor={Colors.primary}
     >

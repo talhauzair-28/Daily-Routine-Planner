@@ -48,6 +48,7 @@ import {
 } from '@/constants/design';
 import { Prayer } from '@/types';
 import { formatTime, getPrayerIcon, getQualityColor } from '@/utils';
+import { t } from '@/utils/i18n';
 
 import { Card, ProgressBar, Text } from '../atoms';
 import { ActivityItem, QualityRater } from '../molecules';
@@ -330,10 +331,10 @@ const PrayersSection: React.FC<PrayersSectionProps> = ({
     <View key={prayer.id} style={styles.prayerItemContainer}>
       <ActivityItem
         title={prayer.name}
-        subtitle={`Target: ${formatTime(prayer.targetTime)}`}
+        subtitle={`${t('target')}: ${formatTime(prayer.targetTime)}`}
         time={
           prayer.actualTime
-            ? `Prayed: ${formatTime(prayer.actualTime)}`
+            ? `${t('prayed')}: ${formatTime(prayer.actualTime)}`
             : undefined
         }
         quality={prayer.quality}
@@ -432,10 +433,10 @@ const PrayersSection: React.FC<PrayersSectionProps> = ({
           <View key={prayer.id} style={styles.prayerItemContainer}>
             <ActivityItem
               title={prayer.name}
-              subtitle={`Target: ${formatTime(prayer.targetTime)}`}
+              subtitle={`${t('target')}: ${formatTime(prayer.targetTime)}`}
               time={
                 prayer.actualTime
-                  ? `Prayed: ${formatTime(prayer.actualTime)}`
+                  ? `${t('prayed')}: ${formatTime(prayer.actualTime)}`
                   : undefined
               }
               quality={prayer.quality}

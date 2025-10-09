@@ -1,0 +1,57 @@
+{
+  "app": {
+    "name": "یومیہ معمولات کا منصوبہ",
+    "description": "اپنے یومیہ معمولات کا منصوبہ بنائیں اور ان کا تعاقب کریں",
+    "version": "ورژن"
+  },
+  "navigation": {
+    "home": "گھر",
+    "planner": "منصوبہ ساز",
+    "tasks": "کام",
+    "calendar": "کیلنڈر",
+    "statistics": "اعداد و شمار",
+    "settings": "سیٹنگز",
+    "dashboard": "ڈیش بورڈ",
+    "today": "آج",
+    "habits": "عادات",
+    "analytics": "تجزیات",
+    "prayerDetails": "نماز کی تفصیلات",
+    "zikrSession": "ذکر کا وقت",
+    "quranSession": "قرآن کا وقت",
+    "familyTime": "خاندانی وقت",
+    "disciplineChallenges": "نظم و ضبط کے چیلنجز",
+    "streakDetails": "سلسلے کی تفصیلات"
+  },
+  "planner": {
+    "title": "یومیہ منصوبہ ساز",
+    "addTask": "کام شامل کریں",
+    "editTask": "کام میں تبدیلی",
+    "deleteTask": "کام حذف کریں",
+    "markComplete": "مکمل کا نشان لگائیں",
+    "markIncomplete": "نامکمل کا نشان لگائیں",
+    "noTasks": "آج کے لیے کوئی کام نہیں",
+    "taskName": "کام کا نام",
+    "taskDescription": "کام کی تفصیل",
+    "taskTime": "کام کا وقت",
+    "priority": "ترجیح",
+    "category": "قسم"
+  },
+  "tasks": {
+    "allTasks": "تمام کام",
+    "completedTasks": "مکمل شدہ کام",
+    "pendingTasks": "باقی کام",
+    "overduetasks": "وقت سے زیادہ کام",
+    "taskCompleted": "کام کامیابی سے مکمل ہوا",
+    "taskDeleted": "کام کامیابی سے حذف ہوا",
+    "taskUpdated": "کام کامیابی سے اپ ڈیٹ ہوا"
+  },
+  "settings": {
+    "language": "زبان",
+    "theme": "تھیم",
+    "notifications": "اطلاعات",
+    "privacy": "رازداری",
+    "about": "کے بارے میں",
+    "help": "مدد",
+    "feedback": "رائے"
+  }
+}

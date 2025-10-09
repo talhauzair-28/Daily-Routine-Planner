@@ -18,7 +18,9 @@
       "Bash(find:*)",
       "Bash(npm install)",
       "Bash(npx tsc:*)",
-      "Bash(claude doctor)"
+      "Bash(claude doctor)",
+      "Bash(npm install:*)",
+      "Bash(npm run lint)"
     ],
     "deny": [],
     "ask": []

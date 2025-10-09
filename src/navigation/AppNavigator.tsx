@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from '@/constants';
 import { TYPOGRAPHY } from '@/constants/design';
+import { t } from '@/utils/i18n';
 
 // Import screens
 import HomeScreen from '@/screens/HomeScreen';
@@ -106,27 +107,27 @@ const TabNavigator: React.FC = () => {
       <Tab.Screen
         name={ROUTES.HOME}
         component={HomeScreen}
-        options={{ title: 'Dashboard' }}
+        options={{ title: t('app.navigation.dashboard') }}
       />
       <Tab.Screen
         name={ROUTES.TODAY}
         component={TodayScreen}
-        options={{ title: 'Today' }}
+        options={{ title: t('app.navigation.today') }}
       />
       <Tab.Screen
         name={ROUTES.HABITS}
         component={HabitsScreen}
-        options={{ title: 'Habits' }}
+        options={{ title: t('app.navigation.habits') }}
       />
       <Tab.Screen
         name={ROUTES.ANALYTICS}
         component={AnalyticsScreen}
-        options={{ title: 'Analytics' }}
+        options={{ title: t('app.navigation.analytics') }}
       />
       <Tab.Screen
         name={ROUTES.SETTINGS}
         component={SettingsScreen}
-        options={{ title: 'Settings' }}
+        options={{ title: t('settings') }}
       />
     </Tab.Navigator>
   );
@@ -155,32 +156,32 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen
         name={ROUTES.PRAYER_DETAIL}
         component={PrayerDetailScreen}
-        options={{ title: 'Prayer Details' }}
+        options={{ title: t('app.navigation.prayerDetails') }}
       />
       <Stack.Screen
         name={ROUTES.ZIKR_DETAIL}
         component={ZikrDetailScreen}
-        options={{ title: 'Zikr Session' }}
+        options={{ title: t('app.navigation.zikrSession') }}
       />
       <Stack.Screen
         name={ROUTES.QURAN_DETAIL}
         component={QuranDetailScreen}
-        options={{ title: 'Quran Session' }}
+        options={{ title: t('app.navigation.quranSession') }}
       />
       <Stack.Screen
         name={ROUTES.FAMILY_TIME_DETAIL}
         component={FamilyTimeDetailScreen}
-        options={{ title: 'Family Time' }}
+        options={{ title: t('app.navigation.familyTime') }}
       />
       <Stack.Screen
         name={ROUTES.DISCIPLINE_CHALLENGES}
         component={DisciplineChallengesScreen}
-        options={{ title: 'Discipline Challenges' }}
+        options={{ title: t('app.navigation.disciplineChallenges') }}
       />
       <Stack.Screen
         name={ROUTES.STREAK_DETAIL}
         component={StreakDetailScreen}
-        options={{ title: 'Streak Details' }}
+        options={{ title: t('app.navigation.streakDetails') }}
       />
     </Stack.Navigator>
   );

@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
@@ -9,10 +9,11 @@ import LoadingScreen from '@/components/LoadingScreen';
 import { Colors } from '@/constants/Colors';
 import AppNavigator from '@/navigation/AppNavigator';
 import { persistor, store } from '@/store';
+import { initializeLanguage } from '@/utils/i18n';
 
 /**
  * App component - Root application wrapper
- * Provides Redux store, navigation, and theme context
+ * Provides Redux store, navigation, theme context, and i18n initialization
  */
 const App: React.FC = () => {
 
@@ -20,7 +21,10 @@ const App: React.FC = () => {
   const statusBarStyle = isDarkMode ? 'light-content' : 'dark-content';
   const statusBarBackground = isDarkMode ? Colors.black : Colors.background;
 
-
+  // Initialize i18n on app start
+  useEffect(() => {
+    initializeLanguage();
+  }, []);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
